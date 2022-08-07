@@ -1,0 +1,24 @@
+{
+  "name": "pingalerting",
+  "version": "1.0.0",
+  "description": "Bro idk yet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akshtshrma24/PingAlerting.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akshtshrma24/PingAlerting/issues"
+  },
+  "homepage": "https://github.com/akshtshrma24/PingAlerting#readme",
+  "dependencies": {
+    "exec": "^0.2.1",
+    "express": "^4.18.1",
+    "prom-client": "^14.0.1"
+  }
+}

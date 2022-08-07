@@ -7,49 +7,45 @@ let register = new client.Registry();
 
 const printerIPs = [
     {
-        name: 'google_dns',
-        ip: '8.8.8.8'
+        name: 'octopi',
+        ip: '192.168.42.157'
     },
     {
-        name: 'some_random_hawaiian_gte_dns',
-        ip: '4.4.4.4'
-    },
-    {
-        name: 'cloudflare_dns',
-        ip: '1.1.1.1'
-    },
-    {
-        name: 'definitely_not_an_ip_address',
-        ip: 'adasdasdafwgfuigwfigw.asdadkhsdh'
+        name: 'NPI15CD32',
+        ip: '192.168.42.149'
     },
 ];
 let pingMonitoring = {};
 
-printerIPs.forEach(({name, ip}) => {
-    const gaugeToRegister = new client.Gauge({
-        name: `metrics_for_${name}`,
-        help: `i_didnt_ruin_your_pizza_i_just_changed_the_cheese ${ip}`,
-    });
-    pingMonitoring[ip] = gaugeToRegister
-    register.registerMetric(gaugeToRegister);
-})
+const akshit = new client.Gauge({
+    name: "have_you_ever_been",
+    help: "to a park and you saw a cat",
+    labelNames: ['ipAddress', 'deviceName'],
+});
 
-function pingIP(ipAddress) {
+register.registerMetric(akshit);
+
+// printerIPs.forEach(({name, ip}) => {
+//     akshit.labels('8.8.8.8', 'goggle dns').inc()
+//     akshit.labels('151.101.66.49', 'cool math gamez').inc()
+// })
+
+function pingIP(ip,name) {
     return new Promise((resolve) => {
         try{
-            exec(`ping -c 5 ${ipAddress}`, (error, stdout, stderr) => {
+            exec(`ping -c 5 ${ip}`, (error, stdout, stderr) => {
                 if(error){
                     // logger.error(`error: ${error.message}`);
-                    pingMonitoring[ipAddress].set(0)                    
+                    akshit.labels(ip, name).set(0)
                     resolve(false);
                 }
                 if(stderr){
                     // logger.error(`error: ${error.message}`);
-                    pingMonitoring[ipAddress].set(0)                    
+                    akshit.labels(ip, name).set(0)
                     resolve(false);
                 } 
                 else if (stdout){                    
-                    pingMonitoring[ipAddress].set(1)
+                    akshit.labels(ip, name).set(1)
                     resolve(true);
                 }
             });
@@ -77,7 +73,7 @@ app.listen(5000, () =>{
 
 
 setTimeout(() => {
-    printerIPs.forEach(({ip}) => {
-        pingIP(ip);
+    printerIPs.forEach(({name, ip}) => {
+        pingIP(ip,name)
     })
 }, 1000);

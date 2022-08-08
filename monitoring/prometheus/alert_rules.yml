@@ -8,5 +8,5 @@ groups:
         labels:
           severity: critical
         annotations:
-          summary: 'A device on the internal network has not been responding to pings for 60 seconds'
+          summary: 'Device_Down_for_more_than_60_seconds'
           description: 'Cant Ping: ({{ $labels.deviceName }} IP:{{$labels.ipAddress}}).'

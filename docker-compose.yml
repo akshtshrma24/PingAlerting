@@ -22,8 +22,7 @@ services:
     devices:
       - /dev/kmsg:/dev/kmsg
     depends_on:
-      - sce-ledsign
-      - sce-printer
+      - temporary_container
   nginx:
     image: 'nginx'
     container_name: quasar_nginx

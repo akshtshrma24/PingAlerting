@@ -43,8 +43,7 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     depends_on:
-      - sce-ledsign
-      - sce-printer
+      - temporary_container
   alertmanager:
     image: prom/alertmanager:v0.23.0
     restart: on-failure

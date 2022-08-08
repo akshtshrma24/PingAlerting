@@ -8,5 +8,5 @@ groups:
         labels:
           severity: critical
         annotations:
-          summary: have_you_ever_been test alert
-          description: 'Bad{{ $labels.deviceName }}.'
+          summary: Pinging Error 
+          description: 'Cant Ping: {{ $labels.deviceName }}.'

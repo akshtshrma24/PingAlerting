@@ -2,11 +2,11 @@ groups:
   - name: alert_rules
     interval: 15s
     rules:
-      - alert: Pinging_Error
+      - alert: Device_is_down
         expr: have_you_ever_been < 1
         for: 1s
         labels:
           severity: critical
         annotations:
           summary: Pinging Error 
-          description: 'Cant Ping: ({{ $labels.deviceName }}).'
+          description: 'Cant Ping: ({{ $labels.deviceName }} IP:{{$labels.ipAddress}}).'

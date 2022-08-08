@@ -2,7 +2,7 @@ groups:
   - name: alert_rules
     interval: 15s
     rules:
-      - alert: {$labels.deviceName}_Pinging_Error!
+      - alert: Pinging_Error
         expr: have_you_ever_been < 1
         for: 1s
         labels:

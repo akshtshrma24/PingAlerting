@@ -7,12 +7,12 @@ let register = new client.Registry();
 
 const printerIPs = [
     {
-        name: 'octopi',
-        ip: '192.168.42.157'
+        name: '----',
+        ip: 'xxx.xxx.xxx.xxx'
     },
     {
-        name: 'NPI15CD32',
-        ip: '192.168.42.149'
+        name: '----',
+        ip: 'xxx.xxx.xxx.xxx'
     },
 ];
 let pingMonitoring = {};

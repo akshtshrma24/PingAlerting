@@ -1,16 +1,12 @@
 {
     "Devices": {
         "Device1": {
-            "ENABLED": true,
             "NAME": "XXXXXXXXXXXXXXXXXX",
-            "IP": "XXXXXXXXXXXXXXXXXX",
-            "LPD_URL": "XXXXXXXXXXXXXXXXXX"
+            "IP": "XXXXXXXXXXXXXXXXXX"
         },
         "Device2": {
-            "ENABLED": true,
             "NAME": "XXXXXXXXXXXXXXXXXX",
-            "IP": "XXXXXXXXXXXXXXXXXX",
-            "LPD_URL": "XXXXXXXXXXXXXXXXXX"
+            "IP": "XXXXXXXXXXXXXXXXXX"
         }
     }
 }

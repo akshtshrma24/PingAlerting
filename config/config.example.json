@@ -2,11 +2,13 @@
     "Devices": {
         "Device1": {
             "NAME": "XXXXXXXXXXXXXXXXXX",
-            "IP": "XXXXXXXXXXXXXXXXXX"
+            "IP": "XXXXXXXXXXXXXXXXXX",
+            "ENABLED": true
         },
         "Device2": {
             "NAME": "XXXXXXXXXXXXXXXXXX",
-            "IP": "XXXXXXXXXXXXXXXXXX"
+            "IP": "XXXXXXXXXXXXXXXXXX",
+            "ENABLED": true
         }
     }
 }

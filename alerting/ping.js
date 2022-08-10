@@ -37,38 +37,38 @@ for (let i = 0; i < rawArgs.length; i += 2) {
   }
 
 let IPs = Object.assign.apply({}, names.map( (v, i) => ( {[v]: IPStemp[i]} ) ) );
-let pingMonitoring = {};
 
 const akshit = new client.Gauge({
-    name: "have_you_ever_been",
-    help: "to a park and you saw a cat",
+    name: "DeviceDown",
+    help: "device is down",
     labelNames: ['ipAddress', 'deviceName'],
 });
 
 register.registerMetric(akshit);
 
 function pingIP(ip,name) {
+  let timer = Date.now()
     return new Promise((resolve) => {
         try{
-            exec(`ping -c 5 ${ip}`, (error, stdout, stderr) => {
-                if(error){
-                    console.log("setting to 0 for ", ip)
-                    akshit.labels(ip, name).set(0)
+            exec(`ping -c 5 ${ip}`, (err, stdout, stderr) => {
+                if(err){
+                    console.log(`adding ${Math.floor((Date.now() - timer) / 1000)} for `, ip)
+                    akshit.labels(ip, name).inc(Math.floor((Date.now() - timer) / 1000))
                     resolve(false);
                 }
                 if(stderr){
-                    console.log("setting to 0 for ", ip)
-                    akshit.labels(ip, name).set(0)
+                    console.log(`adding ${Math.floor((Date.now() - timer) / 1000)} for `, ip)
+                    akshit.labels(ip, name).inc(Math.floor((Date.now() - timer) / 1000))
                     resolve(false);
                 } 
                 else if (stdout){                  
                     console.log("setting to 1 for ", ip)
-                    akshit.labels(ip, name).set(1)
+                    akshit.labels(ip, name).set(0)
                     resolve(true);
                 }
             });
-        } catch(error){
-            logger.error('function had an error: ', error);
+        } catch(err){
+            console.log('function had an error: ', error);
             resolve(false);
         }
     });
@@ -89,9 +89,8 @@ app.listen(5000, () =>{
     console.log('Started server on port 5000');
 });
 
-setTimeout(() => {
+setInterval(async () => {
     Object.keys(IPs).forEach(key => {
-        let address = IPs[key];
-        pingIP(address,key)
+        pingIP(IPs[key],key)
     })
-}, 1000);
+}, 10000);

@@ -3,10 +3,10 @@ groups:
     interval: 15s
     rules:
       - alert: Device_is_down
-        expr: have_you_ever_been < 1
+        expr: DeviceDown > 60
         for: 1s
         labels:
           severity: critical
         annotations:
-          summary: 'Device_Down_for_more_than_60_seconds'
-          description: 'Cant Ping: ({{ $labels.deviceName }} IP:{{$labels.ipAddress}}).'
+          summary: 'A device on the SCE network hasnt responded to pings'
+          description: 'The {{$labels.deviceName}} ({{$labels.ipAddress}}) has been unresponsive for {{ $value | printf "%.0f" }} seconds'

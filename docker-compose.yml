@@ -59,5 +59,20 @@ services:
     restart: on-failure
     environment:
       - DISCORD_WEBHOOK=${DISCORD_WEBHOOK_URL}
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./monitoring/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - ./monitoring/grafana/data:/var/lib/grafana
+    environment:
+      - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s/grafana/
+    user: "1000"
+    depends_on:
+      - prometheus
 volumes:
   alertmanager-data:

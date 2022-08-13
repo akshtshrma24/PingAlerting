@@ -61,7 +61,7 @@ app.listen(metricsPort, () =>{
 });
 
 devices.forEach(({ip, name}) => {
-  pingingMetric.labels(ip, name).set(0)
+  pingingMetric.labels(ip, name).set(Date.now())
 });
 
 setInterval(async () => {

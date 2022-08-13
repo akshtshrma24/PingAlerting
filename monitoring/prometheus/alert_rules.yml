@@ -3,7 +3,7 @@ groups:
     interval: 15s
     rules:
       - alert: DeviceDown
-        expr: time() - DeviceLastSeen > 10
+        expr: time() - (device_last_seen / 1000) > 10
         for: 1m
         labels:
           severity: critical

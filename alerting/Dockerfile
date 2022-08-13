@@ -20,7 +20,4 @@ COPY ./config /app/config
 
 EXPOSE 5000
 
-
-RUN  chmod +x ./alerting/runPing.sh
-
-ENTRYPOINT ["./alerting/runPing.sh"]
+CMD ["node", "./alerting/ping.js"]

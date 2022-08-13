@@ -1,14 +1,11 @@
 {
-    "Devices": {
-        "Device1": {
-            "NAME": "XXXXXXXXXXXXXXXXXX",
-            "IP": "XXXXXXXXXXXXXXXXXX",
-            "ENABLED": true
-        },
-        "Device2": {
-            "NAME": "XXXXXXXXXXXXXXXXXX",
-            "IP": "XXXXXXXXXXXXXXXXXX",
-            "ENABLED": true
+    "devices": [
+        {
+            "name": "Google DNS",
+            "ip": "8.8.8.8"
         }
-    }
+    ],
+    "scrapeIntervalSeconds": 10,
+    "metricsPort": 5000,
+    "packetCount": 1
 }

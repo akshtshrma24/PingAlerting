@@ -2,9 +2,9 @@ groups:
   - name: alert_rules
     interval: 15s
     rules:
-      - alert: Device_is_down
-        expr: DeviceDown > 60
-        for: 1s
+      - alert: DeviceDown
+        expr: time() - DeviceLastSeen > 10
+        for: 1m
         labels:
           severity: critical
         annotations:

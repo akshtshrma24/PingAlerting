@@ -10,6 +10,10 @@ COPY ./package.json .
 #installs packages
 RUN npm install
 
+RUN apk update
+
+RUN apk add net-snmp-tools
+
 #copies this file to the desination
 COPY ./alerting /app/alerting
 
@@ -20,4 +24,4 @@ COPY ./config /app/config
 
 EXPOSE 5000
 
-CMD ["node", "./alerting/ping.js"]
+CMD ["node", "./alerting/scraper.js"]

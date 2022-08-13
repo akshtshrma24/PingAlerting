@@ -10,3 +10,11 @@ groups:
         annotations:
           summary: 'A device on the SCE network hasnt responded to pings'
           description: 'The {{$labels.deviceName}} ({{$labels.ipAddress}}) has been unresponsive for {{ $value | printf "%.0f" }} seconds'
+      - alert: SNMPDown
+        expr: time() - (last_snmp_response /1000) > 10
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: 'A device on the SCE network hasnt responded to snmpwalk'
+          description: 'The {{$labels.deviceName}} ({{$labels.ipAddress}}) has been unresponsive for {{ $value | printf "%.0f" }} seconds to snmpwalk'

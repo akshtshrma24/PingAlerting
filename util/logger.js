@@ -13,6 +13,7 @@ const LOG_LEVELS = {
   INFO: 'INFO',
   WARNING: 'WARNING',
   ERROR: 'ERROR',
+  SUCCESS: 'SUCCESS',
 };
 
 function getLineOfCode() {
@@ -44,6 +45,8 @@ function printToConsole(level, ...message) {
     formattedMessage = `${consoleColors.red}${formattedMessage}${consoleColors.default}`;
   } else if (level === LOG_LEVELS.WARNING) {
     formattedMessage = `${consoleColors.yellow}${formattedMessage}${consoleColors.default}`;
+  } else if (level === LOG_LEVELS.SUCCESS){
+    formattedMessage = `${consoleColors.green}${formattedMessage}${consoleColors.default}`;
   }
   console.log(formattedMessage);
 }
@@ -64,4 +67,8 @@ function error(...message) {
   printToConsole(LOG_LEVELS.ERROR, ...message);
 }
 
-module.exports = { debug, info, warn, error };
+function success(...message){
+  printToConsole(LOG_LEVELS.SUCESS, ...message);
+}
+
+module.exports = { debug, info, warn, error, success };

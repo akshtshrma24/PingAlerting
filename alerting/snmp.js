@@ -22,9 +22,7 @@ function executeSNMPCommand(ip) {
 
 async function checkSNMP(ip, name) {
     const result = await this.executeSNMPCommand(ip);
-    logger.warn(result)
     if(result){
-        logger.success("GOT SNMP DATA FROM IP: ", ip)
         return true
     }
     return false

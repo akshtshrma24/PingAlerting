@@ -37,9 +37,23 @@ const snmpMetric = new client.Gauge({
     help: "The last time the device responded to snmpwalk",
     labelNames: ['ipAddress', 'deviceName'],
 });
+const snmpLatency = new client.Gauge({
+    name: "snmp_latency",
+    help: "Latency of our snmp requests",
+    labelNames: ['ipAddress', 'deviceName'],
+});
+const pingLatency = new client.Gauge({
+    name: "ping_latency",
+    help: "Latency of our ping requests",
+    labelNames: ['ipAddress', 'deviceName'],
+});
+
   
 register.registerMetric(pingingMetric);
 register.registerMetric(snmpMetric);
+register.registerMetric(pingLatency);
+register.registerMetric(snmpLatency);
+
 register.setDefaultLabels ({
     app: 'ping'
 });
@@ -63,12 +77,16 @@ devices.forEach(({ip, name, snmp}) => {
 
 setInterval(async () => {
   devices.forEach(async ({ip, name, snmp}) => {
+    let timer = Date.now();
     pingCheck = await ping.checkIfDeviceUp(ip, name)
+    pingLatency.labels(ip,name).set(Date.now() - timer)
     if(pingCheck){
         pingingMetric.labels(ip, name).set(Date.now())
     }
     if(snmp){
+        timer = Date.now();
         snmpCheck = await snmpwalk.checkSNMP(ip,name)
+        snmpLatency.labels(ip,name).set(Date.now() - timer)
         if(snmpCheck) snmpMetric.labels(ip, name).set(Date.now())
     }
 });

@@ -20,7 +20,7 @@ function executeSNMPCommand(ip) {
     });
 }
 
-async function checkSNMP(ip, name) {
+async function checkSNMP(ip) {
     const result = await this.executeSNMPCommand(ip);
     if(result){
         return true

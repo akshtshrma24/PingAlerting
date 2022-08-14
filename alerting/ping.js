@@ -25,7 +25,7 @@ function executePingCommand(ip) {
   });
 }
 
-async function checkIfDeviceUp(ip, name) {
+async function checkIfDeviceUp(ip) {
   const result = await this.executePingCommand(ip);
   if(result) return true
   return false

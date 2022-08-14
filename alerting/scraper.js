@@ -78,14 +78,14 @@ devices.forEach(({ip, name, snmp}) => {
 setInterval(async () => {
   devices.forEach(async ({ip, name, snmp}) => {
     let timer = Date.now();
-    pingCheck = await ping.checkIfDeviceUp(ip, name)
+    pingCheck = await ping.checkIfDeviceUp(ip)
     pingLatency.labels(ip,name).set(Date.now() - timer)
     if(pingCheck){
         pingingMetric.labels(ip, name).set(Date.now())
     }
     if(snmp){
         timer = Date.now();
-        snmpCheck = await snmpwalk.checkSNMP(ip,name)
+        snmpCheck = await snmpwalk.checkSNMP(ip)
         snmpLatency.labels(ip,name).set(Date.now() - timer)
         if(snmpCheck) snmpMetric.labels(ip, name).set(Date.now())
     }

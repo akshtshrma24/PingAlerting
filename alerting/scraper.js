@@ -43,7 +43,7 @@ const snmpLatency = new client.Gauge({
     labelNames: ['ipAddress', 'deviceName'],
 });
 const pingLatency = new client.Gauge({
-    name: "ping_latency",
+    name: "ping_latency_ms",
     help: "Latency of our ping requests",
     labelNames: ['ipAddress', 'deviceName'],
 });

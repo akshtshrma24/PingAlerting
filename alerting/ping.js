@@ -11,8 +11,6 @@ const {
   packetCount,
 } = require('../config/config.json');
 
-
-
 function executePingCommand(ip) {
   return new Promise((resolve) => {
     exec(`ping -c ${packetCount} ${ip}`, (error, stdout, stderr) => {

@@ -12,25 +12,23 @@ const {
 } = require('../config/config.json');
 
 
-class ping{
-  constructor(){}
 
-  executePingCommand(ip) {
-    return new Promise((resolve) => {
-      exec(`ping -c ${packetCount} ${ip}`, (error, stdout, stderr) => {
-        if(error || stderr) {
-          logger.error(`Unable to ping ${ip}: \n`, {error, stderr, stdout})
-          return resolve(false);
-        }
-        return resolve(true);
-      });
+function executePingCommand(ip) {
+  return new Promise((resolve) => {
+    exec(`ping -c ${packetCount} ${ip}`, (error, stdout, stderr) => {
+      if(error || stderr) {
+        logger.error(`Unable to ping ${ip}: \n`, {error, stderr, stdout})
+        return resolve(false);
+      }
+      return resolve(true);
     });
-  }
-
-  async checkIfDeviceUp(ip, name) {
-    const result = await this.executePingCommand(ip);
-    if(result) return true
-    return false
-  }
+  });
 }
-module.exports = { PING }
+
+async function checkIfDeviceUp(ip, name) {
+  const result = await this.executePingCommand(ip);
+  if(result) return true
+  return false
+}
+
+module.exports = { checkIfDeviceUp, executePingCommand}

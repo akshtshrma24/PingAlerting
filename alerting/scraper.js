@@ -4,11 +4,11 @@ const client = require('prom-client');
 const express = require('express');
 
 const logger = require('../util/logger');
-const { snmp } = require('./snmp.js');
-const { ping } = require('./ping.js');
+const snmpwalk = require('./snmp.js');
+const ping = require('./ping.js');
 
-const pingObj = new ping();
-const snmpObj = new snmp();
+console.log(snmpwalk)
+console.log(ping)
 
 const {
     devices,
@@ -63,12 +63,12 @@ devices.forEach(({ip, name, snmp}) => {
 
 setInterval(async () => {
   devices.forEach(async ({ip, name, snmp}) => {
-    pingCheck = await pingObj.checkIfDeviceUp(ip, name)
+    pingCheck = await ping.checkIfDeviceUp(ip, name)
     if(pingCheck){
         pingingMetric.labels(ip, name).set(Date.now())
     }
     if(snmp){
-        snmpCheck = await snmpObj.checkSNMP(ip,name)
+        snmpCheck = await snmpwalk.checkSNMP(ip,name)
         if(snmpCheck) snmpMetric.labels(ip, name).set(Date.now())
     }
 });

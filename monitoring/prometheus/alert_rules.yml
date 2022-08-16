@@ -3,7 +3,7 @@ groups:
     interval: 15s
     rules:
       - alert: DeviceDown
-        expr: time() - (device_last_seen / 1000) > 10
+        expr: time() - (device_last_seen / 1000) > 120
         for: 1m
         labels:
           severity: critical
@@ -11,7 +11,7 @@ groups:
           summary: 'A device on the SCE network hasnt responded to pings'
           description: 'The {{$labels.deviceName}} ({{$labels.ipAddress}}) has been unresponsive for {{ $value | printf "%.0f" }} seconds'
       - alert: SNMPDown
-        expr: time() - (last_snmp_response /1000) > 10
+        expr: time() - (last_snmp_response /1000) > 120
         for: 1m
         labels:
           severity: critical

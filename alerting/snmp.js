@@ -20,13 +20,4 @@ function executeSNMPCommand(ip) {
     });
 }
 
-async function checkSNMP(ip) {
-    const result = await this.executeSNMPCommand(ip);
-    if(result){
-        return true
-    }
-    return false
-}
-
-
-module.exports = { checkSNMP, executeSNMPCommand };
+module.exports = { executeSNMPCommand };
